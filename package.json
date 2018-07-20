@@ -1,0 +1,25 @@
+{
+  "name": "pm2-adonis",
+  "version": "1.0.0",
+  "description": "PM2 Adonis Module",
+  "main": "app.js",
+  "dependencies": {
+    "@pm2/io": "^2.1.0",
+    "pm2": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ruby184/pm2-adonis"
+  },
+  "config": {
+  },
+  "apps": [
+    {
+      "merge_logs": true,
+      "max_memory_restart": "200M",
+      "script": "app.js"
+    }
+  ],
+  "author": "Ľubomír Jesze",
+  "license": "MIT"
+}
