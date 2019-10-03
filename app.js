@@ -1,18 +1,24 @@
-const io = require('@pm2/io')
+const { Entrypoint } = require('@pm2/io')
 const pm2 = require('pm2')
 
 const BROADCAST_EVENT_TYPE = 'adonis:hop'
 
-class Entrypoint extends io.Entrypoint {
+class App extends Entrypoint {
   onStart (cb) {
-    pm2.launchBus((err, bus) => {
+    pm2.connect((err) => {
       if (err) {
         return cb(err)
       }
 
-      bus.on(BROADCAST_EVENT_TYPE, this._onBroadcast.bind(this))
-
-      cb()
+      pm2.launchBus((err, bus) => {
+        if (err) {
+          return cb(err)
+        }
+  
+        bus.on(BROADCAST_EVENT_TYPE, this._onBroadcast.bind(this))
+  
+        cb()
+      })
     })
   }
 
@@ -31,9 +37,9 @@ class Entrypoint extends io.Entrypoint {
 
         pm2.sendDataToProcessId(wid, {
           type: BROADCAST_EVENT_TYPE,
-          topic: data.handle,
+          topic: 'broadcast',
           data
-        }, (err, res) => {
+        }, (err) => {
           if (err) {
             return this.io.notifyError(err)
           }
@@ -43,4 +49,4 @@ class Entrypoint extends io.Entrypoint {
   }
 }
 
-new Entrypoint()
+new App()
