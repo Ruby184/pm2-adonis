@@ -1,6 +1,6 @@
 {
   "name": "pm2-adonis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PM2 Adonis Module",
   "main": "app.js",
   "dependencies": {
