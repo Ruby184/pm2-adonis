@@ -22,6 +22,10 @@ class App extends Entrypoint {
     })
   }
 
+  onStop (_err, cb) {
+    pm2.disconnect(cb)
+  }
+
   _onBroadcast({ process: proc, data }) {
     pm2.Client.getProcessByName(proc.name, (err, workers) => {
       if (err) {
