@@ -46,7 +46,7 @@ class App extends Entrypoint {
     
     this._eventsMeter = this.io.meter({
       name: 'Events recieved',
-      unit: 'events/min'
+      unit: 'evts/sec'
     })
 
     this._buildProcessList(() => {
